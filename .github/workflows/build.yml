@@ -1,0 +1,18 @@
+name: Build PSP
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: ghcr.io/pspdev/pspdev:latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: make
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catatan-psp
+          path: EBOOT.PBP
